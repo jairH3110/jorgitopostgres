@@ -23,8 +23,8 @@ export class ControlController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() body: any) {
-    return this.controlService.update(+id, body);
+  update(@Param('id') id: string, @Body()updateControlDto : UpdateControlDto) {
+    return this.controlService.update(+id, updateControlDto);
   }
 
   @Delete(':id')
