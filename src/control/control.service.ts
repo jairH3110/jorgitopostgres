@@ -1,26 +1,36 @@
 import { Injectable } from '@nestjs/common';
+import { Repository } from 'typeorm';
 import { CreateControlDto } from './dto/create-control.dto';
 import { UpdateControlDto } from './dto/update-control.dto';
-
+import { Control } from './entities/control.entity';
+import { InjectRepository } from '@nestjs/typeorm';
 @Injectable()
 export class ControlService {
+  constructor(
+    @InjectRepository(Control) private controlrepo:Repository<Control>
+  ){}
   create(createControlDto: CreateControlDto) {
-    return 'This action adds a new control';
+    
+    const newcontrol= this.controlrepo.create(createControlDto);
+    return this.controlrepo.save(newcontrol);
   }
 
   findAll() {
-    return `This action returns all control`;
+    return this.controlrepo.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} control`;
+  findOne(idcontrol: number) {
+    return this.controlrepo.findOne({where:{idcontrol:idcontrol}}) ;
   }
 
-  update(id: number, updateControlDto: UpdateControlDto) {
-    return `This action updates a #${id} control`;
+ async update(idcontrol: number, createControlDto: CreateControlDto) {
+const controln = await this.controlrepo.findOne({where:{idcontrol:idcontrol}});
+this.controlrepo.merge(controln,createControlDto);
+
+    return this.controlrepo.save(controln);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} control`;
+ async remove(idcontrol: number) {
+    return await this.controlrepo.delete(idcontrol);
   }
 }

@@ -15,44 +15,27 @@ export class AutosService {
 
 
 
- async create(body :any) {
-    const distribuidor = new Distribuidor();
-    distribuidor.nombrecontacto = body.distribuidor;
-    distribuidor.nombrecomercial = body.nombrecomercial;
-    distribuidor.direccion = body.direccion;
-    distribuidor.telefono = body.telefono;
-    distribuidor.ciudad = body.ciudad ;
-    distribuidor.nombrecontacto = body.nombrecontacto;
-
-    const newDistribuidor = await this.disRepo.save(distribuidor);
-    
-    const autos = new Auto();
-    autos.idauto = body.idauto; 
-    autos.placas = body.placas; 
-    autos.marcha = body.marcha
-    autos.modelo = body.modelo; 
-    autos.color = body.color; 
-    autos.fecha = body.fecha; 
-    autos.rentad = body.rentad; 
-    autos.fkdistribuidor = newDistribuidor; 
+ async create(createAutoDto :CreateAutoDto) {
+   
+  const autos = this.autoRepo.create(createAutoDto);
         
     return this.autoRepo.save(autos);
 
   }
 
   findAll() {
-    return this.autoRepo.find({relations: ['distribuidor']});
+    return this.autoRepo.find();
   }
 
   findOne(idauto: number) {
     return this.autoRepo.findOne({where:{idauto:idauto}});
   }
 
- async update(idauto: number, body:any) {
+ async update(idauto: number, updateAutoDto:UpdateAutoDto) {
    
   const auto = await this.autoRepo.findOne({where:{idauto:idauto}});
   
-  this.autoRepo.merge(auto,body);
+  this.autoRepo.merge(auto,updateAutoDto);
   return this.autoRepo.save(auto);
 
 }

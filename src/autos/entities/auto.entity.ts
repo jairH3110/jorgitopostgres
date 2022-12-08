@@ -1,4 +1,4 @@
-import {Entity, Column, PrimaryGeneratedColumn,OneToOne,JoinColumn} from 'typeorm';
+import {Entity, Column, PrimaryGeneratedColumn,OneToOne,JoinColumn, ManyToMany, OneToMany} from 'typeorm';
 import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
 import { Distribuidor } from 'src/distribuidor/entities/distribuidor.entity';
 
@@ -29,9 +29,9 @@ export class Auto {
     @Column()
     rentad:number
    
-    @OneToOne(() => Distribuidor)
-    @JoinColumn()
-    fkdistribuidor:Distribuidor
+
+    @Column()
+    distribuidor:number
     
        
 }

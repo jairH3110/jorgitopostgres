@@ -1,4 +1,4 @@
-import {Entity, Column, PrimaryGeneratedColumn, OneToOne} from 'typeorm';
+import {Entity, Column, PrimaryGeneratedColumn, OneToOne, ManyToOne, JoinColumn} from 'typeorm';
 import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
 import { Auto } from 'src/autos/entities/auto.entity';
 @Entity()
@@ -24,7 +24,7 @@ ciudad:string
 @Column()
 nombrecontacto:string
 
-@OneToOne(() => Auto, (auto) => auto.fkdistribuidor)
-  auto:Auto
+
+
 
 }

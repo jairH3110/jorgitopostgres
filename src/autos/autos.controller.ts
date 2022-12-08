@@ -23,8 +23,8 @@ export class AutosController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAutoDto: UpdateAutoDto) {
-    return this.autosService.update(+id, updateAutoDto);
+  update(@Param('id') id: string, @Body() body: any) {
+    return this.autosService.update(+id,  body);
   }
 
   @Delete(':id')

@@ -13,8 +13,8 @@ export class DistribuidorService {
   @InjectRepository(Distribuidor) private distriRepo: Repository<Distribuidor>
  ){}
 
-  create(body: any) {
-    const newdis= this.distriRepo.create(body);
+  create(createDistribuidorDto: CreateDistribuidorDto) {
+    const newdis= this.distriRepo.create(createDistribuidorDto);
     return this.distriRepo.save(newdis);
   }
 
@@ -26,9 +26,9 @@ export class DistribuidorService {
     return this.distriRepo.findOne({where:{idistribuidor:idistribuidor}});
   }
 
- async update(idistribuidor: number, body: any) {
+ async update(idistribuidor: number, createDistribuidorDto: CreateDistribuidorDto) {
   const distrin = await this.distriRepo.findOne({where:{idistribuidor:idistribuidor}})  ;
-  this.distriRepo.merge(distrin,body);
+  this.distriRepo.merge(distrin,createDistribuidorDto);
   return this.distriRepo.save(distrin) ;
   }
 

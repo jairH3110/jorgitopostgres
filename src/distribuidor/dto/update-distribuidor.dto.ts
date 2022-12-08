@@ -1,4 +1,39 @@
 import { PartialType } from '@nestjs/mapped-types';
 import { CreateDistribuidorDto } from './create-distribuidor.dto';
+import { IsNumber, IsString, Length, MaxLength, Min } from "class-validator";
+import { ValidationMessages } from "src/helpers/validation.messages";
+export class UpdateDistribuidorDto extends PartialType(CreateDistribuidorDto) {
 
-export class UpdateDistribuidorDto extends PartialType(CreateDistribuidorDto) {}
+
+
+    @MaxLength(80,{message: ValidationMessages.DIMENSIONES})
+    @IsString({message: ValidationMessages.ES_CADENA + '$property'}) 
+    idistribuidor:number
+    
+    
+    @MaxLength(80,{message: ValidationMessages.DIMENSIONES})
+    @IsString({message: ValidationMessages.ES_CADENA + '$property'})
+    nombrecomercial:string
+    
+    
+    @MaxLength(80,{message: ValidationMessages.DIMENSIONES})
+    @IsString({message: ValidationMessages.ES_CADENA + '$property'})
+        direccion:string 
+            
+    
+    @MaxLength(80,{message: ValidationMessages.DIMENSIONES})
+    @IsString({message: ValidationMessages.ES_CADENA + '$property'})
+    telefono:string
+    
+    
+    @MaxLength(80,{message: ValidationMessages.DIMENSIONES})
+    @IsString({message: ValidationMessages.ES_CADENA + '$property'})
+    ciudad:string
+    
+    
+    @MaxLength(80,{message: ValidationMessages.DIMENSIONES})
+    @IsString({message: ValidationMessages.ES_CADENA + '$property'})
+    nombrecontacto:string
+            
+
+}
